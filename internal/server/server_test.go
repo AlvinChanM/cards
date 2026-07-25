@@ -97,11 +97,11 @@ func TestFullGameFlowOverWebSocket(t *testing.T) {
 	sync0 := decodeStateSync(t, p0)
 	sync1 := decodeStateSync(t, p1)
 
-	if len(sync0.YourHand) != 24 || len(sync1.YourHand) != 24 {
-		t.Fatalf("expected 24 cards each, got %d/%d", len(sync0.YourHand), len(sync1.YourHand))
+	if len(sync0.YourHand) != 16 || len(sync1.YourHand) != 16 {
+		t.Fatalf("expected 16 cards each, got %d/%d", len(sync0.YourHand), len(sync1.YourHand))
 	}
-	if sync0.OpponentCardCount != 24 || sync1.OpponentCardCount != 24 {
-		t.Fatalf("expected opponent counts of 24, got %d/%d", sync0.OpponentCardCount, sync1.OpponentCardCount)
+	if sync0.OpponentCardCount != 16 || sync1.OpponentCardCount != 16 {
+		t.Fatalf("expected opponent counts of 16, got %d/%d", sync0.OpponentCardCount, sync1.OpponentCardCount)
 	}
 
 	// Critical redaction check: player 0's payload must not mention

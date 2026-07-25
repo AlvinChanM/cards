@@ -36,10 +36,13 @@ type LastPlay struct {
 // methods are safe to call concurrently IF the caller wraps access
 // with its own mutex (see internal/ws.Hub) -- Game itself holds no
 // lock so it can be used directly and deterministically in tests.
+//
+// Players array has 3 seats: seats 0 and 1 are real players (connected clients),
+// seat 2 is a dead/placeholder hand with no player (dealt but never plays).
 type Game struct {
 	Phase       Phase
-	Players     [2]PlayerState
-	CurrentTurn int  // seat index (0 or 1) whose turn it is
+	Players     [3]PlayerState
+	CurrentTurn int  // seat index (0 or 1, never 2)
 	LeadPlayer  int  // seat that currently holds free lead (no lastPlay to beat)
 	LastPlay    *LastPlay
 	FirstRound  bool
@@ -74,16 +77,18 @@ func NewGame() *Game {
 // StartRound shuffles, deals, and determines the leader for a new
 // round. On the very first round, whoever holds Spade-Three leads.
 // On subsequent rounds, the previous round's winner leads.
+// Deals to three seats: seats 0 and 1 (real players), seat 2 (dead hand).
 func (g *Game) StartRound(rng *rand.Rand) {
 	deck := NewDeck()
 	Shuffle(deck, rng)
-	h0, h1 := Deal(deck)
+	h0, h1, h2 := Deal(deck)
 	g.Players[0].Hand = h0
 	g.Players[1].Hand = h1
+	g.Players[2].Hand = h2
 	g.LastPlay = nil
 
 	if g.RoundWinner == -1 {
-		g.LeadPlayer = leaderHoldingSpadeThree(h0, h1)
+		g.LeadPlayer = leaderHoldingSpadeThree(h0, h1, h2)
 	} else {
 		g.LeadPlayer = g.RoundWinner
 	}
@@ -91,7 +96,7 @@ func (g *Game) StartRound(rng *rand.Rand) {
 	g.Phase = Playing
 }
 
-func leaderHoldingSpadeThree(h0, h1 []Card) int {
+func leaderHoldingSpadeThree(h0, h1, h2 []Card) int {
 	for _, c := range h0 {
 		if c.Suit == Spade && c.Rank == Three {
 			return 0
@@ -102,8 +107,7 @@ func leaderHoldingSpadeThree(h0, h1 []Card) int {
 			return 1
 		}
 	}
-	// Spade-Three was one of the removed cards in some deck variant edge
-	// case; fall back to seat 0 rather than panic.
+	// Spade-Three is in the dead hand (seat 2) or was removed; fall back to seat 0.
 	return 0
 }
 

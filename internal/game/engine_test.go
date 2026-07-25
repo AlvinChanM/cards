@@ -13,7 +13,8 @@ func TestScriptedRound(t *testing.T) {
 	// Player 0 holds Spade-Three so they lead.
 	g.Players[0].Hand = []Card{c(Three, Spade), c(Four, Spade), c(Nine, Heart)}
 	g.Players[1].Hand = []Card{c(Five, Spade), c(King, Club)}
-	g.LeadPlayer = leaderHoldingSpadeThree(g.Players[0].Hand, g.Players[1].Hand)
+	g.Players[2].Hand = []Card{} // dead hand (empty for this test)
+	g.LeadPlayer = leaderHoldingSpadeThree(g.Players[0].Hand, g.Players[1].Hand, g.Players[2].Hand)
 	g.CurrentTurn = g.LeadPlayer
 
 	if g.LeadPlayer != 0 {

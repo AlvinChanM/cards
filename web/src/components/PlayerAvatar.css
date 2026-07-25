@@ -1,0 +1,50 @@
+.player-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  user-select: none;
+}
+
+.player-avatar-small {
+  width: 32px;
+  height: 32px;
+}
+
+.player-avatar-medium {
+  width: 48px;
+  height: 48px;
+}
+
+.player-avatar-large {
+  width: 64px;
+  height: 64px;
+}
+
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-weight: bold;
+  color: white;
+  font-size: 0.85em;
+}
+
+.player-avatar-seat-0 .avatar-circle {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.player-avatar-seat-1 .avatar-circle {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.player-avatar-small .avatar-circle {
+  font-size: 0.7em;
+}
+
+.player-avatar-large .avatar-circle {
+  font-size: 1em;
+}

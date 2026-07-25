@@ -10,8 +10,9 @@ import "math/rand"
 //   - Two: only 1 copy kept                            -> 1 card
 //   - No jokers.
 //
-// Total: 44 + 3 + 1 = 48 cards, which splits evenly into two 24-card
-// hands with no kitty/bottom cards.
+// Total: 44 + 3 + 1 = 48 cards, which splits evenly into three 16-card
+// hands with no kitty/bottom cards. The third hand is a dead/placeholder hand
+// (no connected player).
 func NewDeck() []Card {
 	deck := make([]Card, 0, 48)
 	suits := []Suit{Spade, Heart, Club, Diamond}
@@ -43,21 +44,27 @@ func Shuffle(deck []Card, rng *rand.Rand) {
 	})
 }
 
-// Deal splits a 48-card deck into two 24-card hands, dealt alternately.
-func Deal(deck []Card) (hand0, hand1 []Card) {
+// Deal splits a 48-card deck into three 16-card hands, dealt alternately.
+// The third hand is a dead/placeholder hand with no connected player.
+func Deal(deck []Card) (hand0, hand1, hand2 []Card) {
 	if len(deck) != 48 {
 		panic("game: Deal requires exactly 48 cards")
 	}
-	hand0 = make([]Card, 0, 24)
-	hand1 = make([]Card, 0, 24)
+	hand0 = make([]Card, 0, 16)
+	hand1 = make([]Card, 0, 16)
+	hand2 = make([]Card, 0, 16)
 	for i, c := range deck {
-		if i%2 == 0 {
+		switch i % 3 {
+		case 0:
 			hand0 = append(hand0, c)
-		} else {
+		case 1:
 			hand1 = append(hand1, c)
+		case 2:
+			hand2 = append(hand2, c)
 		}
 	}
 	SortCards(hand0)
 	SortCards(hand1)
-	return hand0, hand1
+	SortCards(hand2)
+	return hand0, hand1, hand2
 }

@@ -26,8 +26,8 @@ func TestDeckComposition(t *testing.T) {
 
 func TestDealSplitsEvenly(t *testing.T) {
 	deck := NewDeck()
-	h0, h1 := Deal(deck)
-	if len(h0) != 24 || len(h1) != 24 {
-		t.Fatalf("hand sizes = %d/%d, want 24/24", len(h0), len(h1))
+	h0, h1, h2 := Deal(deck)
+	if len(h0) != 16 || len(h1) != 16 || len(h2) != 16 {
+		t.Fatalf("hand sizes = %d/%d/%d, want 16/16/16", len(h0), len(h1), len(h2))
 	}
 }

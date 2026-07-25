@@ -1,7 +1,9 @@
-# 跑得快 (Zhao Pao Kuai)
+# 跑得快 (Paodekuai)
 
-A real-time, two-player web implementation of **跑得快** (Zǒu/Pǎodékuài), a
-classic Chinese climbing card game (2-player 关牌 variant). Built with a Go
+A real-time, two-player web implementation of **跑得快** (Pǎodékuài,
+sometimes also called Zǒudekuài), a classic Chinese climbing/shedding card
+game — part of the same family as Dou Dizhu (斗地主), but played head-to-head
+between two players instead of landlord-vs-farmers. Built with a Go
 WebSocket server and a React + TypeScript client.
 
 ## Features

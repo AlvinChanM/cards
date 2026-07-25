@@ -1,4 +1,5 @@
 import { useCountUp } from '../hooks/useCountUp'
+import { PlayerAvatar } from './PlayerAvatar'
 import './ScoreBoard.css'
 
 interface ScoreBoardProps {
@@ -19,6 +20,7 @@ export function ScoreBoard({ roundsWon, playerNames, yourSeat }: ScoreBoardProps
   return (
     <div className="score-board">
       <div className="score-entry">
+        <PlayerAvatar seatNumber={0} playerName={playerNames[0]} size="small" />
         <span className="score-name">{label(0)}</span>
         <span className="score-value">{score0}</span>
       </div>
@@ -26,6 +28,7 @@ export function ScoreBoard({ roundsWon, playerNames, yourSeat }: ScoreBoardProps
       <div className="score-entry">
         <span className="score-value">{score1}</span>
         <span className="score-name">{label(1)}</span>
+        <PlayerAvatar seatNumber={1} playerName={playerNames[1]} size="small" />
       </div>
     </div>
   )

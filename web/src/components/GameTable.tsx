@@ -125,6 +125,7 @@ export function GameTable() {
         <OpponentHandBadge
           count={sync.opponentCardCount}
           name={sync.playerNames[opponentIdx]}
+          seatNumber={opponentIdx}
           isOpponentTurn={!myTurn && sync.phase === 'playing'}
           lowCardAlert={opponentLowCards}
         />

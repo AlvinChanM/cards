@@ -1,0 +1,16 @@
+# Go
+/bin/
+
+# Web (built assets get copied into cmd/server/web by `make build-web`)
+/web/node_modules/
+/web/dist/
+/cmd/server/web/
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# Logs
+*.log

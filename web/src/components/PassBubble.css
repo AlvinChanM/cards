@@ -1,0 +1,47 @@
+.pass-bubble {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 16;
+  pointer-events: none;
+  animation: pass-bubble-pop 1s ease both;
+}
+
+.pass-bubble-you {
+  bottom: 140px;
+}
+
+.pass-bubble-opponent {
+  top: 90px;
+}
+
+.pass-bubble span {
+  display: inline-block;
+  background: rgba(17, 24, 39, 0.85);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+}
+
+@keyframes pass-bubble-pop {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.1);
+  }
+  25% {
+    transform: translateX(-50%) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(1);
+  }
+}

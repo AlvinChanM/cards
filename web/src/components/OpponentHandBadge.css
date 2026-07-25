@@ -1,0 +1,62 @@
+.opponent-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.opponent-badge-active {
+  animation: badge-turn-pulse 1.6s ease-in-out infinite;
+}
+
+.opponent-badge-alert {
+  animation: badge-alert-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes badge-turn-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.55);
+  }
+}
+
+@keyframes badge-alert-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.75);
+  }
+}
+
+.opponent-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.opponent-cards {
+  display: flex;
+}
+
+.opponent-card-back {
+  width: 28px;
+  height: 40px;
+  margin-right: -18px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(45deg, #1e3a8a, #1e3a8a 3px, #1e40af 3px, #1e40af 6px);
+  border: 1px solid #0f172a;
+}
+
+.opponent-card-back:last-child {
+  margin-right: 0;
+}
+
+.opponent-count {
+  font-size: 12px;
+  color: #6b7280;
+}
